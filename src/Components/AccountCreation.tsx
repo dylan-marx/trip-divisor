@@ -10,9 +10,9 @@ interface AccountCreationProps {
 const AccountCreation: FC<AccountCreationProps> = ({ updateNames }) => {
     let [names, setNames] = useState<string[]>([]);
     let [newName, setNewName] = useState<string>('');
+    let [addingName, setAddingName] = useState<boolean>(false);
     let [showError, setShowError] = useState<boolean>(false);
     let [error, setError] = useState<string>('');
-    let [addingName, setAddingName] = useState<boolean>(false);
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setNewName(event.target.value);
@@ -42,6 +42,7 @@ const AccountCreation: FC<AccountCreationProps> = ({ updateNames }) => {
         updateNames(names);
     }, [names])
 
+    // Adds a name if it is unique
     const addName = () => {
         if (newName.trim() !== '') {
             if (!(names.includes(newName))) {

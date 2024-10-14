@@ -1,3 +1,5 @@
 .account-creation-container {
     border: 1px solid;
+    width: max-content;
+    padding: 12px;
 }
