@@ -6,7 +6,7 @@ interface AccountProps {
     onEdit: (oldName: string, newName: string) => boolean;
 }
 
-const Account: FC<AccountProps> = ({name, onDelete, onEdit}) => {
+const AccountBubble: FC<AccountProps> = ({name, onDelete, onEdit}) => {
     let [editing, setEditing] = useState(false);
     let [newName, setNewName] = useState(name);
 
@@ -52,4 +52,4 @@ const Account: FC<AccountProps> = ({name, onDelete, onEdit}) => {
     );
 }
 
-export default Account;
+export default AccountBubble;

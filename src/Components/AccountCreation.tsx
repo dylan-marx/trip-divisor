@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 
 import './Styling/AccountCreation.css'
-import Account from './Account';
+import Account from './AccountBubble';
 
 interface AccountCreationProps {
     updateNames: (newNames: string[]) => void;

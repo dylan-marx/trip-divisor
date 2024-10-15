@@ -1,57 +1,25 @@
 import { useEffect, useState } from "react"
 import AccountCreation from "./Components/AccountCreation"
+import ExpenseCreation from "./Components/ExpenseCreation";
+import Account from "./Components/Objects/Account";
+import Expense from "./Components/Objects/Expense";
 
 function App() {
 
-  class Account {
-    name: string;
-    owedAmount: number[];
-
-    constructor(name: string, owedAmount: number[]) {
-      this.name = name;
-      this.owedAmount = owedAmount;
-    }
-  }
-
-  class Expense {
-    payments: number[];
-
-
-    constructor(payments: number[]) {
-      this.payments = payments;
-    }
-
-    public getTotal = () => {
-      let total:number = 0;
-      for (let payment of this.payments) {
-        total = total + payment;
-      }
-
-      return total;
-    }
-
-    public getFairShare = () => {
-      const total = this.getTotal();
-      const n = this.payments.length;
-
-      return total/n;
-    }
-
-    public getOwed = () => {
-      const owed: number[] = [];
-      const fairShare: number = this.getFairShare();
-
-      for (let i = 0; i < this.payments.length; i++) {
-        const delta = fairShare - this.payments[i];
-        owed.push(delta);
-      }
-
-      return owed;
-    }
-  }
-
   const [names, setNames] = useState<string[]>([]);
   const [allAccounts, setAccounts] = useState<Account[]>([]);
+  const [allExpenses, setExpenses] = useState<Expense[]>([]);
+  
+  // TODO REMOVE
+  useEffect(() => {
+    let expense = new Expense([2, 3, 10], 'food');
+    let newExpenses : Expense[] = [];
+    newExpenses.push(expense);
+
+    expense = new Expense([13, 0, 6], 'food');
+    newExpenses.push(expense);
+    setExpenses(newExpenses);
+  }, []);
 
   // Updates the names
   const handleUpdateNames = (newNames: string[]) => {
@@ -71,17 +39,11 @@ function App() {
   }, [names]);
 
   return (
-    <>
+    <div className='app-container'>
       <AccountCreation updateNames={handleUpdateNames}/>
-
-      {allAccounts.map((account, index) => (
-        <div className="this">
-          {account.name}
-          <div>{account.owedAmount}</div>
-        </div>
-      ))}
-    </>
+      <ExpenseCreation allAccounts={allAccounts} allExpenses={allExpenses}/>
+    </div>
   )
 }
 
-export default App
+export default App;

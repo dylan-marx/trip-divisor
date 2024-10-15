@@ -1,0 +1,13 @@
+.expense-creation-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 8px;
+}
+
+.expense {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 8px;
+}
