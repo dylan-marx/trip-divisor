@@ -16,12 +16,15 @@ function App() {
 
     // if a name gets deleted
     if (newNames.length < names.length) {
+
+      // get the name that was deleted
+      const missingName = names.filter((name) => !newNames.includes(name))[0];
+      const indexOfMissingName = names.indexOf(missingName);
+
       let updatedExpenses = allExpenses.map((expense) => {
-        let newPayments = Array(newNames.length).fill(0);
-        for (let i = 0; i <  Math.min(expense.payments.length, newNames.length); i++) {
-          newPayments[i] = expense.payments[i];
-        }
-  
+        const newPayments = [...expense.payments];
+        newPayments.splice(indexOfMissingName, 1);
+
         return new Expense(newPayments, expense.description);
       });
 
