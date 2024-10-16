@@ -9,7 +9,7 @@ function App() {
   const [names, setNames] = useState<string[]>([]);
   const [allAccounts, setAccounts] = useState<Account[]>([]);
   const [allExpenses, setExpenses] = useState<Expense[]>([]);
-  
+  const [owed, setOwed] = useState<number[]>([]);
 
   // Updates the names
   const handleUpdateNames = (newNames: string[]) => {
@@ -56,14 +56,38 @@ function App() {
     setExpenses(newExpenses);
   }
 
+  const calculateOwed = () => {
+    let total = Array(allExpenses[0].payments.length).fill(0);
+
+    for (let expens of allExpenses) {
+      const fairShare = expens.getFairShare();
+
+      for (let i = 0; i < expens.payments.length; i++) {
+        // calculate if the person is owed or owes money
+        total[i] = total[i] + (fairShare - expens.payments[i]);
+      }
+    }
+
+    return total;
+  }
+
   useEffect(() => {
-    console.log("Updated expenses:", allExpenses);
-  }, [allExpenses]);
+    if (allExpenses.length >= 1) {
+      setOwed(calculateOwed);
+    }
+  }, [allExpenses])
 
   return (
     <div className='app-container'>
       <AccountCreation updateNames={handleUpdateNames}/>
       <ExpenseCreation allAccounts={allAccounts} allExpenses={allExpenses} updateExpenses={handleUpdateExpenses}/>
+      {
+        owed.map((entry, index) => (
+          <div>
+            {entry}
+          </div>
+        ))
+      }
     </div>
   )
 }
