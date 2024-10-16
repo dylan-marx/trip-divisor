@@ -10,16 +10,6 @@ function App() {
   const [allAccounts, setAccounts] = useState<Account[]>([]);
   const [allExpenses, setExpenses] = useState<Expense[]>([]);
   
-  // TODO REMOVE
-  useEffect(() => {
-    let expense = new Expense([2, 3, 10], 'food');
-    let newExpenses : Expense[] = [];
-    newExpenses.push(expense);
-
-    expense = new Expense([13, 0, 6], 'food');
-    newExpenses.push(expense);
-    setExpenses(newExpenses);
-  }, []);
 
   // Updates the names
   const handleUpdateNames = (newNames: string[]) => {
@@ -34,14 +24,30 @@ function App() {
       const newAccount = new Account(names[i], []);
       newAccounts.push(newAccount);
     }
+
+    // Adjust expense payement length to account for new Accounts added
+    let updatedExpeses = allExpenses.map((expense) => {
+      let newPayments = Array(newAccounts.length).fill(0);
+
+      for (let i = 0; i < expense.payments.length; i++) {
+        newPayments[i] = expense.payments[i];
+      }
     
+      return {...expense, payments: newPayments};
+    })
+
+    setExpenses(updatedExpeses);
     setAccounts(newAccounts);
   }, [names]);
+
+  const handleUpdateExpenses = (newExpenses: Expense[]) => {
+    setExpenses(newExpenses);
+  }
 
   return (
     <div className='app-container'>
       <AccountCreation updateNames={handleUpdateNames}/>
-      <ExpenseCreation allAccounts={allAccounts} allExpenses={allExpenses}/>
+      <ExpenseCreation allAccounts={allAccounts} allExpenses={allExpenses} updateExpenses={handleUpdateExpenses}/>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import Account from "./Objects/Account";
 import Expense from "./Objects/Expense";
 import './Styling/ExpenseCreation.css'
@@ -6,12 +6,20 @@ import './Styling/ExpenseCreation.css'
 interface ExpenseCreationProps {
     allAccounts: Account[];
     allExpenses: Expense[];
+    updateExpenses : (newExpenses: Expense[]) => void;
 }
 
-const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses}) => {
+const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses,  updateExpenses }) => {
     const [description, setDescription] = useState('');
     const [addingExpense, setAddingExpense] = useState(false);
     const [expenses, setExpenses] = useState<Expense[]>(allExpenses);
+    
+    const [error, setError] = useState('');
+    const [showError, setShowError] = useState(false);
+
+    useEffect(() => {
+        updateExpenses (expenses);
+    }, [expenses]);
 
     const handlePayementChange = (expenseIndex: number, paymentIndex: number, newPaymentValue: number) => {
         const newExpenses = [...expenses];
@@ -24,17 +32,26 @@ const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses}) 
     }
 
     const addExpense = () => {
-        if (description.trim() !== '') {
-            const newPayments = new Array(allAccounts.length).fill(0);
-            const newExpense = new Expense(newPayments, description);
-            const newExpenses = [...expenses];
-            newExpenses.push(newExpense);
-    
-            setExpenses(newExpenses);
-            setDescription('');
-            setAddingExpense(false);
+        if (allAccounts.length !== 0) {
+            if (description.trim() !== '') {
+                const newPayments = new Array(allAccounts.length).fill(0);
+                const newExpense = new Expense(newPayments, description);
+                const newExpenses = [...expenses];
+                newExpenses.push(newExpense);
+        
+                setExpenses(newExpenses);
+                setDescription('');
+                setAddingExpense(false);
+                setError('');
+                setShowError(false);
+            } else {
+                setError('Please add a description');
+                setShowError(true);
+            }
+        } else {
+            setError('Please add the people who went on the trip');
+            setShowError(true);
         }
-
     }
 
     return (
@@ -44,7 +61,11 @@ const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses}) 
                 {
                     (!addingExpense) && <button onClick={() => setAddingExpense(true)}>Add Expense</button>
                 }
-
+                {
+                    (showError) && <div>
+                        <div>{error}</div>
+                    </div>
+                }
                 {
                     addingExpense && (
                         <div>
@@ -58,7 +79,7 @@ const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses}) 
             </div>
             {   
                 
-                expenses.map((expense, expenseIndex) => (
+                allExpenses.map((expense, expenseIndex) => (
                     <div key={expenseIndex} className="expense">
                         <div>{expense.description}</div>
                         {
