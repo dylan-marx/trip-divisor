@@ -3,6 +3,18 @@ import AccountCreation from "./Components/AccountCreation"
 import ExpenseCreation from "./Components/ExpenseCreation";
 import Account from "./Components/Objects/Account";
 import Expense from "./Components/Objects/Expense";
+import TransactionDisplay from "./Components/TransactionDisplay";
+
+interface Person {
+  index: number;
+  amount: number;
+}
+
+interface Transactions {
+  from: string;
+  to: string;
+  amount: number;
+}
 
 function App() {
 
@@ -10,6 +22,8 @@ function App() {
   const [allAccounts, setAccounts] = useState<Account[]>([]);
   const [allExpenses, setExpenses] = useState<Expense[]>([]);
   const [owed, setOwed] = useState<number[]>([]);
+  const [transactions, setTransactions] = useState<Transactions[]>([]);
+
 
   // Updates the names
   const handleUpdateNames = (newNames: string[]) => {
@@ -71,23 +85,60 @@ function App() {
     return total;
   }
 
+  const settleDebts = () => {
+    let debtors: Person[] = [];
+    let creditors: Person[] = [];
+    
+    owed.forEach((balance, index) => {
+      if (balance > 0) {
+        debtors.push({index, amount: balance});
+      } else if (balance < 0) {
+        creditors.push({index, amount: -balance});
+      }
+    });
+
+    debtors.sort((a, b) => b.amount - a.amount);
+    creditors.sort((a, b) => b.amount - a.amount);
+
+    let transactions: Transactions[] = [];
+    let i = 0, j = 0;
+
+    while (i < debtors.length && j < creditors.length) {
+      let debtor = debtors[i];
+      let creditor = creditors[j];
+      let amount = Math.min(debtor.amount, creditor.amount);
+
+      transactions.push({
+        from: allAccounts[debtor.index].name,
+        to: allAccounts[creditor.index].name,
+        amount: amount
+      });
+
+      debtor.amount = parseFloat((debtor.amount - amount).toFixed(2));
+      creditor.amount = parseFloat((creditor.amount - amount).toFixed(2));
+
+      if (Math.abs(debtor.amount) < 0.01) i++;
+      if (Math.abs(creditor.amount) < 0.01) j++;
+    }
+
+    return transactions;
+  }
+
   useEffect(() => {
     if (allExpenses.length >= 1) {
       setOwed(calculateOwed);
+      setTransactions(settleDebts);
     }
-  }, [allExpenses])
+  }, [allExpenses, owed])
 
+  useEffect(() => {
+    console.log(owed);
+  }, [owed])
   return (
     <div className='app-container'>
       <AccountCreation updateNames={handleUpdateNames}/>
       <ExpenseCreation allAccounts={allAccounts} allExpenses={allExpenses} updateExpenses={handleUpdateExpenses}/>
-      {
-        owed.map((entry, index) => (
-          <div>
-            {entry}
-          </div>
-        ))
-      }
+      <TransactionDisplay transactions={transactions} />
     </div>
   )
 }
