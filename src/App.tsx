@@ -23,7 +23,7 @@ function App() {
 
     let updatedExpenses = allExpenses.map((expense) => {
       let newPayments = Array(newAccounts.length).fill(0);
-      for (let i = 0; i < expense.payments.length; i++) {
+      for (let i = 0; i <  Math.min(expense.payments.length, newAccounts.length); i++) {
         newPayments[i] = expense.payments[i];
       }
       // CHANGE: Use Expense constructor instead of spread operator
