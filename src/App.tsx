@@ -13,11 +13,26 @@ function App() {
 
   // Updates the names
   const handleUpdateNames = (newNames: string[]) => {
+
+    // if a name gets deleted
+    if (newNames.length < names.length) {
+      let updatedExpenses = allExpenses.map((expense) => {
+        let newPayments = Array(newNames.length).fill(0);
+        for (let i = 0; i <  Math.min(expense.payments.length, newNames.length); i++) {
+          newPayments[i] = expense.payments[i];
+        }
+  
+        return new Expense(newPayments, expense.description);
+      });
+
+      setExpenses(updatedExpenses);
+    }
+
+
     setNames([...newNames]);
   }
 
   // Create new Account objects for all names
-
   useEffect(() => {
     let newAccounts: Account[] = names.map(name => new Account(name, []));
 
@@ -26,7 +41,7 @@ function App() {
       for (let i = 0; i <  Math.min(expense.payments.length, newAccounts.length); i++) {
         newPayments[i] = expense.payments[i];
       }
-      // CHANGE: Use Expense constructor instead of spread operator
+
       return new Expense(newPayments, expense.description);
     });
 
