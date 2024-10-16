@@ -18,13 +18,19 @@ const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses,  
     const [showError, setShowError] = useState(false);
 
     useEffect(() => {
-        updateExpenses (expenses);
-    }, [expenses]);
+        updateExpenses(allExpenses);
+    }, [allExpenses, updateExpenses])
 
     const handlePayementChange = (expenseIndex: number, paymentIndex: number, newPaymentValue: number) => {
-        const newExpenses = [...expenses];
-        newExpenses[expenseIndex].payments[paymentIndex] = newPaymentValue;
-        setExpenses(newExpenses);
+        const newExpense = allExpenses.map((expense, index) => {
+            if (index === expenseIndex) {
+                const newPayments = [...expense.payments];
+                newPayments[paymentIndex] = newPaymentValue;
+                return new Expense(newPayments, expense.description);
+            }
+            return expense;
+        });
+        updateExpenses(newExpense);
     }
 
     const handleInputChange  = (event: ChangeEvent<HTMLInputElement>) => {
@@ -36,10 +42,9 @@ const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses,  
             if (description.trim() !== '') {
                 const newPayments = new Array(allAccounts.length).fill(0);
                 const newExpense = new Expense(newPayments, description);
-                const newExpenses = [...expenses];
-                newExpenses.push(newExpense);
+                const newExpenses = [...allExpenses, newExpense];
         
-                setExpenses(newExpenses);
+                updateExpenses(newExpenses);
                 setDescription('');
                 setAddingExpense(false);
                 setError('');

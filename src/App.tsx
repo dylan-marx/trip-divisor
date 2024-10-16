@@ -17,32 +17,30 @@ function App() {
   }
 
   // Create new Account objects for all names
+
   useEffect(() => {
-    let newAccounts: Account[] = [];
+    let newAccounts: Account[] = names.map(name => new Account(name, []));
 
-    for (let i = 0; i < names.length; i++){
-      const newAccount = new Account(names[i], []);
-      newAccounts.push(newAccount);
-    }
-
-    // Adjust expense payement length to account for new Accounts added
-    let updatedExpeses = allExpenses.map((expense) => {
+    let updatedExpenses = allExpenses.map((expense) => {
       let newPayments = Array(newAccounts.length).fill(0);
-
       for (let i = 0; i < expense.payments.length; i++) {
         newPayments[i] = expense.payments[i];
       }
-    
-      return {...expense, payments: newPayments};
-    })
+      // CHANGE: Use Expense constructor instead of spread operator
+      return new Expense(newPayments, expense.description);
+    });
 
-    setExpenses(updatedExpeses);
+    setExpenses(updatedExpenses);
     setAccounts(newAccounts);
   }, [names]);
 
   const handleUpdateExpenses = (newExpenses: Expense[]) => {
     setExpenses(newExpenses);
   }
+
+  useEffect(() => {
+    console.log("Updated expenses:", allExpenses);
+  }, [allExpenses]);
 
   return (
     <div className='app-container'>
