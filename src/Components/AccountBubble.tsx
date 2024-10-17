@@ -1,4 +1,5 @@
 import { ChangeEvent, FC, useState } from "react";
+import './Styling/AccountCreation.css'
 
 interface AccountProps {
     name: string;
@@ -29,7 +30,7 @@ const AccountBubble: FC<AccountProps> = ({name, onDelete, onEdit}) => {
         
     }
     return (
-        <div className="account">
+        <div className="account-bubble">
             {
                showError && <div className='error'>{error}</div>
             }

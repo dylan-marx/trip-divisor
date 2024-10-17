@@ -1,3 +1,5 @@
+import './Styling/TransactionsDisplay.css'
+
 interface Transactions {
     from: string;
     to: string;
@@ -5,12 +7,12 @@ interface Transactions {
   }
 
 const TransactionDisplay: React.FC<{ transactions: Transactions[] }> = ({ transactions }) => (
-    <div>
+    <div className='transaction-container'>
       <h2>Transactions</h2>
       <ul>
         {transactions.map((t, index) => (
           <li key={index}>
-            {t.from} owes ${t.amount} to {t.to}
+            {t.from} owes {t.amount.toFixed(2)} to {t.to}
           </li>
         ))}
       </ul>

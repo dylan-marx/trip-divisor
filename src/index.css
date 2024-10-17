@@ -1,3 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    @apply bg-gray-200;
+}
+
 .app-container {
-    display: flex;
+    @apply flex flex-row gap-4 p-4;
+}
+
+button {
+    @apply bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow;
+}
+
+h2 {
+    @apply !text-7xl block mb-2 font-medium text-gray-900 bg-white dark:bg-inherit dark:text-white;
+}
+
+label {
+    @apply block mb-2 text-sm font-medium text-gray-900 bg-white dark:bg-inherit dark:text-white;
 }

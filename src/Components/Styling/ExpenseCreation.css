@@ -1,8 +1,5 @@
 .expense-creation-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 8px;
+    @apply w-2/4 p-6 h-fit bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700;
 }
 
 .expense {

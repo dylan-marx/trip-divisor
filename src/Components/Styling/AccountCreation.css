@@ -1,5 +1,19 @@
 .account-creation-container {
-    border: 1px solid;
-    width: max-content;
-    padding: 12px;
+    @apply w-1/4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700;
+}
+
+.account-creation-container input {
+    @apply inline w-fit p-4 m-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+}
+
+.account-bubble {
+    @apply bg-white dark:bg-gray-800;
+}
+
+.account-bubble div{
+    @apply p-4 m-4 bg-white shadow dark:bg-gray-800 border rounded;
+}
+
+.account-bubble label{
+    @apply w-fit p-4 m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-400 dark:border-gray-700 inline;
 }

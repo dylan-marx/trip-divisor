@@ -61,6 +61,7 @@ const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses,  
 
     return (
         <div className="expense-creation-container">
+            <h2>Expenses</h2>
             <div>
                 <div>What expenses did you have?</div>
                 {
