@@ -74,13 +74,15 @@ const AccountCreation: FC<AccountCreationProps> = ({ updateNames }) => {
 
             {
                 addingName ? (
-                    <div>
+                    <div className='add-person-container'>
                         <input type='text' id='new-account' onChange={handleInputChange} value={newName}></input>
                         <button onClick={addName}>Add</button>
                         <button onClick={() => setAddingName(false)}>Cancel</button>
                     </div>
                 ) : (
-                    <button onClick={() => setAddingName(true)}>Add Person</button>
+                    <div className='add-person-container'>
+                        <button id='add-person-button' onClick={() => setAddingName(true)}>Add Person</button>
+                    </div>
                 )
                     
             }
