@@ -36,15 +36,17 @@ const AccountBubble: FC<AccountProps> = ({name, onDelete, onEdit}) => {
             }
             {
                 editing? (
-                    <div>
+                    <div className="account-bubble-content">
                         <input type='text' onChange={handleInputChange} value={newName} />
                         <button onClick={() => editClick()}>Done</button>
                     </div>
                 ) : (
-                    <div>
+                    <div className="account-bubble-content">
                         <label>{name}</label>
-                        <button onClick={() => setEditing(true)}>Edit</button>
-                        <button onClick={() => onDelete(name)}>Delete</button>
+                        <div>
+                            <button onClick={() => setEditing(true)}>Edit</button>
+                            <button onClick={() => onDelete(name)}>Delete</button>
+                        </div>
                     </div>
                 )
             }

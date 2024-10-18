@@ -1,5 +1,5 @@
 .account-creation-container {
-    @apply w-1/4 p-6  border rounded-lg shadow bg-gray-800 border-gray-700;
+    @apply w-2/6 p-6  border rounded-lg shadow bg-gray-800 border-gray-700;
 }
 
 .account-creation-container button {
@@ -12,11 +12,15 @@
 
 .add-person-container {
     width: 100%;
-    @apply flex justify-center items-center h-20;
+    @apply flex justify-center items-center h-20 bg-gray-800;
 }
 
-.add-person-container button {
-    @apply w-3/4 h-3/4;
+.add-cancel-account-buttons {
+    @apply flex flex-row bg-gray-800;
+}
+
+.add-cancel-account-buttons button {
+    @apply w-28 p-4;
 }
 
 #add-person-button {
@@ -25,17 +29,22 @@
 }
 
 .account-creation-container input {
-    @apply inline w-fit p-4 m-4 ps-10 text-sm border  rounded-lg  focus:ring-blue-500 focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white;
+    height: 75%;
+    @apply inline w-fit p-2 m-4 ps-5 border  rounded-lg  focus:ring-blue-500 focus:border-blue-500 border-gray-600 placeholder-gray-400 text-gray-800 text-lg;
 }
 
 .account-bubble {
     @apply  bg-gray-800;
 }
 
-.account-bubble div{
-    @apply p-4 m-4  shadow bg-gray-800 border rounded;
+.account-bubble label{
+    @apply w-fit p-4 rounded-lg inline;
 }
 
-.account-bubble label{
-    @apply w-fit p-4 m-4 border rounded-lg shadow bg-gray-400 border-gray-700 inline;
+.account-bubble-content {
+    @apply flex flex-row justify-evenly h-24 p-4 m-4 shadow bg-gray-800 border rounded;
+}
+
+.account-bubble-content div {
+    @apply flex justify-center items-center bg-gray-800;
 }
