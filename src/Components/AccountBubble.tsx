@@ -43,7 +43,7 @@ const AccountBubble: FC<AccountProps> = ({name, onDelete, onEdit}) => {
                 ) : (
                     <div className="account-bubble-content">
                         <label>{name}</label>
-                        <div>
+                        <div className="account-bubble-buttons">
                             <button onClick={() => setEditing(true)}>Edit</button>
                             <button onClick={() => onDelete(name)}>Delete</button>
                         </div>

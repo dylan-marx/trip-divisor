@@ -66,7 +66,7 @@ const AccountCreation: FC<AccountCreationProps> = ({ updateNames }) => {
             <h2>People</h2>
             {
                 showError ? (
-                    <div>{error}</div>
+                    <div className='error'>{error}</div>
                 ) : (
                     <label>Who went on the trip?</label>
                 )
