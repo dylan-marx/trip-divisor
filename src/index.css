@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-    @apply bg-gray-200;
+    @apply bg-gray-200 text-lg;
 }
 
 .app-container {

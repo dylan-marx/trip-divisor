@@ -1,10 +1,50 @@
+
 .expense-creation-container {
-    @apply w-2/4 p-6 h-fit bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700;
+    @apply w-full sm:w-2/4 p-6 h-auto  border border-gray-200 rounded-lg shadow-md bg-gray-800 ;
+}
+
+.expense-creation-controls {
+    @apply flex justify-center items-center text-6xl md:text-8xl;
+}
+
+.expense-creation-controls input {
+    @apply w-full h-12 text-black text-lg ;
+    @apply p-2 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500;
+}
+
+.expense-creation {
+    @apply bg-gray-800 text-white;
+}
+
+.expense-creation div {
+    @apply bg-gray-800 text-white text-lg;
 }
 
 .expense {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    padding: 8px;
+    @apply flex flex-row justify-center items-center m-2 p-4 gap-5 bg-gray-800 border border-white rounded-md shadow-lg;
+    @apply min-h-16 h-auto flex-wrap;
+}
+
+.expense * {
+    @apply text-white bg-gray-800 text-lg;
+}
+
+.expense input {
+    @apply w-fit h-10 p-2 rounded-md border bg-white text-black border-gray-600 focus:ring-blue-500 focus:border-blue-500 text-lg placeholder-gray-400;
+}
+
+.expenses-input {
+    @apply flex flex-row gap-5 flex-wrap;
+}
+
+.expense-description {
+    @apply underline text-3xl;
+}
+
+.expense-account-name {
+    @apply max-w-56 overflow-scroll;
+}
+
+#add-expense-button {
+    width: 100%;
 }

@@ -12,7 +12,6 @@ interface ExpenseCreationProps {
 const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses,  updateExpenses }) => {
     const [description, setDescription] = useState('');
     const [addingExpense, setAddingExpense] = useState(false);
-    const [expenses, setExpenses] = useState<Expense[]>(allExpenses);
     
     const [error, setError] = useState('');
     const [showError, setShowError] = useState(false);
@@ -62,10 +61,10 @@ const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses,  
     return (
         <div className="expense-creation-container">
             <h2>Expenses</h2>
-            <div>
+            <div className="expense-creation">
                 <div>What expenses did you have?</div>
                 {
-                    (!addingExpense) && <button onClick={() => setAddingExpense(true)}>Add Expense</button>
+                    (!addingExpense) && <button id="add-expense-button" onClick={() => setAddingExpense(true)}>Add Expense</button>
                 }
                 {
                     (showError) && <div>
@@ -74,7 +73,7 @@ const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses,  
                 }
                 {
                     addingExpense && (
-                        <div>
+                        <div className="expense-creation-controls">
                             <input type="text" value={description} onChange={handleInputChange}></input>
                             <button onClick={addExpense}>Add</button>
                             <button onClick={() => setAddingExpense(false)}>Cancel</button>
@@ -87,18 +86,27 @@ const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses,  
                 
                 allExpenses.map((expense, expenseIndex) => (
                     <div key={expenseIndex} className="expense">
-                        <div>{expense.description}</div>
-                        {
-                            expense.payments.map((payment, paymentIndex) => (
-                                <input 
-                                    key={paymentIndex}
-                                    type='text'
-                                    value={payment}
-                                    onChange={(event) => handlePayementChange(expenseIndex, paymentIndex, Number(event.target.value))}
-                                />
-                            ))
-                        }
-                        <div>Total: {expense.getTotal()}</div>
+                        <div>
+                            <div className="expense-description">{expense.description}</div>
+                        </div>
+
+                        <div className="expenses-input">
+                            {
+                                expense.payments.map((payment, paymentIndex) => (
+                                    <div key={paymentIndex}>
+                                        <div className="expense-account-name">{allAccounts[paymentIndex].name}</div>
+                                        <input 
+                                            type='text'
+                                            value={payment}
+                                            onChange={(event) => handlePayementChange(expenseIndex, paymentIndex, Number(event.target.value))}
+                                        />
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        <div className="md:w-1/3 text-right">
+                            <div>Total: {expense.getTotal()}</div>
+                        </div>
                     </div>
                 ))
             }
