@@ -4,7 +4,8 @@ interface Transactions {
     from: string;
     to: string;
     amount: number;
-  }
+}
+
 
 const TransactionDisplay: React.FC<{ transactions: Transactions[] }> = ({ transactions }) => (
     <div className='transaction-container'>
