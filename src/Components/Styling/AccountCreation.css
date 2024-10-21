@@ -12,15 +12,17 @@
 
 .add-person-container {
     width: 100%;
-    @apply flex gap-24 justify-center items-center h-20 bg-gray-800;
+    height: 100%;
+    @apply p-2 flex gap-14 justify-center items-center h-20 bg-gray-800;
 }
 
 .add-cancel-account-buttons {
+    height: 75%;
     @apply flex gap-2 flex-row bg-gray-800;
 }
 
 .add-cancel-account-buttons button {
-    @apply w-28 p-4;
+    @apply w-28 p-4 flex items-center justify-center;
 }
 
 #add-person-button {
@@ -38,15 +40,25 @@
 }
 
 .account-bubble label{
-    @apply max-w-24 max-h-20 pr-32 overflow-auto p-4 rounded-lg inline;
+    @apply max-w-[75%] pl-14 text-lg mb-0;
 }
 
 .account-bubble-content {
-    @apply flex flex-row justify-evenly h-24 p-4 m-4 shadow bg-gray-800 border rounded;
+    @apply flex flex-row justify-between items-center h-24 m-4 shadow bg-gray-800 border rounded;
 }
 
 .account-bubble-buttons {
-    @apply flex gap-4 justify-center items-center bg-gray-800;
+    @apply flex flex-row justify-between items-end;
+    height: 100%;
+}
+
+.account-bubble button {
+    height: 100%;
+    @apply flex flex-row gap-4 justify-center items-center bg-white rounded-none;
+}
+
+.account-bubble input {
+    @apply ml-8;
 }
 
 .error {

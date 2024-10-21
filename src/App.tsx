@@ -71,7 +71,7 @@ function App() {
   }
 
   const calculateOwed = () => {
-    let total = Array(allExpenses[0].payments.length).fill(0);
+    let total = Array(allExpenses[0]?.payments.length || 0).fill(0);
 
     for (let expens of allExpenses) {
       const fairShare = expens.getFairShare();
@@ -89,6 +89,7 @@ function App() {
     let debtors: Person[] = [];
     let creditors: Person[] = [];
     
+    // splits into those that owe money and those that are owed
     owed.forEach((balance, index) => {
       if (balance > 0) {
         debtors.push({index, amount: balance});
@@ -103,6 +104,7 @@ function App() {
     let transactions: Transactions[] = [];
     let i = 0, j = 0;
 
+    // divides money until a person has paid off their debt then moves to next
     while (i < debtors.length && j < creditors.length) {
       let debtor = debtors[i];
       let creditor = creditors[j];
@@ -126,14 +128,22 @@ function App() {
 
   useEffect(() => {
     if (allExpenses.length >= 1) {
-      setOwed(calculateOwed);
-      setTransactions(settleDebts);
+      const newOwed = calculateOwed();
+      setOwed(newOwed);
+    } else {
+      setOwed([]);
     }
-  }, [allExpenses, owed])
+  }, [allExpenses]);
 
   useEffect(() => {
-    console.log(owed);
-  }, [owed])
+    if (owed.length > 0) {
+      const newTransactions = settleDebts();
+      setTransactions(newTransactions);
+    } else {
+      setTransactions([]);
+    }
+  }, [owed]);
+
   return (
     <div className='app-container'>
       <AccountCreation updateNames={handleUpdateNames}/>

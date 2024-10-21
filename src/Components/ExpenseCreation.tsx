@@ -16,10 +16,6 @@ const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses,  
     const [error, setError] = useState('');
     const [showError, setShowError] = useState(false);
 
-    useEffect(() => {
-        updateExpenses(allExpenses);
-    }, [allExpenses, updateExpenses])
-
     const handlePayementChange = (expenseIndex: number, paymentIndex: number, newPaymentValue: number) => {
         const newExpense = allExpenses.map((expense, index) => {
             if (index === expenseIndex) {
@@ -29,6 +25,7 @@ const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses,  
             }
             return expense;
         });
+
         updateExpenses(newExpense);
     }
 
@@ -58,13 +55,20 @@ const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses,  
         }
     }
 
+    const handleDelete = (expenseIndex: number) => {
+        const newExpenses = allExpenses.filter((_, index) => index !== expenseIndex);
+        updateExpenses(newExpenses);
+        setError('');
+        setShowError(false);
+    }
+
     return (
         <div className="expense-creation-container">
             <h2>Expenses</h2>
             <div className="expense-creation">
                 <div>What expenses did you have?</div>
                 {
-                    (!addingExpense) && <button id="add-expense-button" onClick={() => setAddingExpense(true)}>Add Expense</button>
+                    (!addingExpense) && <button id="add-expense-button" className="primary-button" onClick={() => setAddingExpense(true)}>Add Expense</button>
                 }
                 {
                     (showError) && <div>
@@ -86,27 +90,30 @@ const ExpenseCreation : FC<ExpenseCreationProps> = ({allAccounts, allExpenses,  
                 
                 allExpenses.map((expense, expenseIndex) => (
                     <div key={expenseIndex} className="expense">
-                        <div>
-                            <div className="expense-description">{expense.description}</div>
-                        </div>
+                        <div className="expense-content">
+                            <div>
+                                <div className="expense-description">{expense.description}</div>
+                            </div>
 
-                        <div className="expenses-input">
-                            {
-                                expense.payments.map((payment, paymentIndex) => (
-                                    <div key={paymentIndex}>
-                                        <div className="expense-account-name">{allAccounts[paymentIndex].name}</div>
-                                        <input 
-                                            type='text'
-                                            value={payment}
-                                            onChange={(event) => handlePayementChange(expenseIndex, paymentIndex, Number(event.target.value))}
-                                        />
-                                    </div>
-                                ))
-                            }
+                            <div className="expenses-input">
+                                {
+                                    expense.payments.map((payment, paymentIndex) => (
+                                        <div key={paymentIndex}>
+                                            <div className="expense-account-name">{allAccounts[paymentIndex].name}</div>
+                                            <input 
+                                                type='text'
+                                                value={payment}
+                                                onChange={(event) => handlePayementChange(expenseIndex, paymentIndex, Number(event.target.value))}
+                                            />
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                            <div className="md:w-1/3 text-right">
+                                <div>Total: {expense.getTotal()}</div>
+                            </div>
                         </div>
-                        <div className="md:w-1/3 text-right">
-                            <div>Total: {expense.getTotal()}</div>
-                        </div>
+                        <button className="delete-button" onClick={() => handleDelete(expenseIndex)}>X</button>
                     </div>
                 ))
             }

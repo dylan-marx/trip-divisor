@@ -11,7 +11,7 @@
 }
 
 button {
-    @apply bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow;
+    @apply bg-gray-300 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow;
 }
 
 h2 {
@@ -20,4 +20,16 @@ h2 {
 
 label {
     @apply block mb-2 text-sm font-medium text-gray-900 bg-white dark:bg-inherit dark:text-white;
+}
+
+.primary-button {
+    @apply bg-white text-gray-800 px-4 py-2 rounded transition duration-100 ease-in-out transform hover:bg-green-400 hover:text-gray-800 hover:scale-y-110;
+}
+
+.delete-button {
+    @apply !bg-red-400 !text-gray-800;
+}
+
+.edit-button {
+    @apply !bg-green-400;
 }

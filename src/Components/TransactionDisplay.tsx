@@ -8,7 +8,7 @@ interface Transactions {
 
 const TransactionDisplay: React.FC<{ transactions: Transactions[] }> = ({ transactions }) => (
     <div className='transaction-container'>
-      <h2>Transactions</h2>
+      <h2>Bill</h2>
       <ul>
         {transactions.map((t, index) => (
           <li key={index}>

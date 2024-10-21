@@ -83,7 +83,7 @@ const AccountCreation: FC<AccountCreationProps> = ({ updateNames }) => {
                     </div>
                 ) : (
                     <div className='add-person-container'>
-                        <button id='add-person-button' onClick={() => setAddingName(true)}>Add Person</button>
+                        <button id='add-person-button' className='primary-button' onClick={() => setAddingName(true)}>Add Person</button>
                     </div>
                 )
                     
