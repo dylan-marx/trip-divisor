@@ -30,7 +30,7 @@
 
 .account-creation-container input {
     height: 75%;
-    @apply inline w-full sm:w-fit p-2 ps-5 border  rounded-lg  focus:ring-blue-500 focus:border-blue-500 border-gray-600 placeholder-gray-400 text-gray-800 text-lg;
+    @apply inline w-2/4 p-2 ps-5 border  rounded-lg  focus:ring-blue-500 focus:border-blue-500 border-gray-600 placeholder-gray-400 text-gray-800 text-lg;
 }
 
 .account-bubble {
