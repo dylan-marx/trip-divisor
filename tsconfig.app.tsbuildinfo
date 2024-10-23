@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/accountbubble.tsx","./src/components/accountcreation.tsx","./src/components/expensecreation.tsx","./src/components/transactiondisplay.tsx","./src/components/objects/account.ts","./src/components/objects/expense.ts"],"version":"5.6.3"}

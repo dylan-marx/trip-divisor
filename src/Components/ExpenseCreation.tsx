@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import Account from "./Objects/Account";
 import Expense from "./Objects/Expense";
 import './Styling/ExpenseCreation.css'
