@@ -1,10 +1,10 @@
 
 .expense-creation-container {
-    @apply w-full sm:w-2/4 p-6 h-auto  border border-gray-200 rounded-lg shadow-md bg-gray-800 ;
+    @apply w-full sm:w-2/4 sm:p-6 h-auto  border border-gray-200 rounded-lg shadow-md bg-gray-800 ;
 }
 
 .expense-creation-controls {
-    @apply flex justify-center items-center gap-3 text-6xl md:text-8xl;
+    @apply flex justify-center items-center gap-3 sm:text-6xl md:text-8xl;
 }
 
 .expense-creation-controls input {
@@ -21,7 +21,7 @@
 }
 
 .expense {
-    @apply flex gap-2 justify-between mb-2 bg-gray-800 items-stretch;
+    @apply flex flex-col sm:flex-row gap-2 justify-between mb-2 bg-gray-800 items-stretch;
 }
 
 .expense-content {
@@ -38,7 +38,7 @@
 }
 
 .expenses-input {
-    @apply flex flex-row gap-5 flex-wrap;
+    @apply flex flex-col sm:flex-row gap-5 flex-wrap;
 }
 
 .expense-description {

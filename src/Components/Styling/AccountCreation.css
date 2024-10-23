@@ -1,38 +1,36 @@
 .account-creation-container {
-    @apply w-2/6 p-6  border rounded-lg shadow bg-gray-800 border-gray-700;
+    @apply w-full mx-auto sm:w-2/6 sm:p-6  border rounded-lg shadow bg-gray-800 border-gray-700;
 }
 
 .account-creation-container button {
-    @apply w-20;
+    @apply w-full py-2 px-4 sm:w-20;
 }
 
 .account-creation-container label {
-    @apply text-lg;
+    @apply text-base font-medium mb-2 block sm:text-lg;
 }
 
 .add-person-container {
-    width: 100%;
-    height: 100%;
-    @apply pt-2 pb-2 flex gap-10 justify-center items-center h-20 bg-gray-800;
+    @apply w-full flex flex-col md:flex-row sm:gap-10 sm:items-center sm:justify-center mb-2 bg-gray-800;
+    min-height: 100px;
+    transition: height 0.3s ease;
 }
 
 .add-cancel-account-buttons {
-    height: 75%;
-    @apply flex gap-2 flex-row bg-gray-800;
+    @apply w-full flex flex-col gap-2 bg-gray-800 sm:w-28 sm:flex-row sm:space-y-0 sm:space-x-2;
 }
 
 .add-cancel-account-buttons button {
-    @apply w-28 p-4 flex items-center justify-center;
+    @apply w-full sm:w-28 flex items-center justify-center;
 }
 
 #add-person-button {
-    width: 100%;
-    height: 75%;
+    @apply w-full sm:h-16;
 }
 
 .account-creation-container input {
     height: 75%;
-    @apply inline w-fit p-2 ps-5 border  rounded-lg  focus:ring-blue-500 focus:border-blue-500 border-gray-600 placeholder-gray-400 text-gray-800 text-lg;
+    @apply inline w-full sm:w-fit p-2 ps-5 border  rounded-lg  focus:ring-blue-500 focus:border-blue-500 border-gray-600 placeholder-gray-400 text-gray-800 text-lg;
 }
 
 .account-bubble {
@@ -40,26 +38,24 @@
 }
 
 .account-bubble label{
-    @apply max-w-[75%] pl-14 text-lg mb-0;
+    @apply w-full sm:max-w-[75%] sm:pl-14 text-lg mb-0 truncate;
 }
 
 .account-bubble-content {
-    width: 100%;
-    @apply flex flex-row justify-between items-center h-24 mb-4 shadow bg-gray-800 border rounded;
+    @apply flex md:w-auto sm:flex-row  justify-between items-center sm:h-24 mb-4 shadow bg-gray-800 border rounded;
 }
 
 .account-bubble-buttons {
-    @apply flex flex-row justify-between items-end;
-    height: 100%;
+    @apply flex h-full flex-row justify-between items-end;
 }
 
 .account-bubble button {
-    height: 100%;
-    @apply flex flex-row gap-4 justify-center items-center bg-white rounded-none;
+    @apply flex h-full flex-row gap-4 justify-center items-center bg-white rounded-none;
+    @apply w-full md:w-20;
 }
 
 .account-bubble input {
-    @apply ml-8;
+    @apply ml-2 sm:ml-8;
 }
 
 .error {
@@ -67,5 +63,5 @@
 }
 
 #done-button {
-    @apply w-40;
+    @apply w-full sm:w-40;
 }
